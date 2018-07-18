@@ -9,7 +9,7 @@ You must have [Docker](https://www.docker.com/community-edition) installed (Comm
 Then in a terminal:
 
 ```
-docker push srappoccio/fastjet-tutorial:latest
+docker pull srappoccio/fastjet-tutorial:latest
 ```
 
 
