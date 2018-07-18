@@ -45,6 +45,13 @@ make example_softdrop
 ```
 
 
+There is also an example to use PYTHIA8 to generate events with a given configuration (the example we have is boosted $Z\rightarrow ll+$jets):
+
+```
+cd examples
+./pythia2fastjet test.cfg 100 1
+```
+
 Happy thinking!
 
 
