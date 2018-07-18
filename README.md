@@ -58,4 +58,14 @@ jupyter notebook --ip 0.0.0.0 --no-browser --allow-root
 
 You can then access the jupyter notebook on your host machine here: [http://localhost:8888/tree](http://localhost:8888/tree).
 
+Note: sometimes you may get a page looking for a token. Instead of doing that you can just directly access the website from the text dump from jupyter, which looks something like:
+
+```
+    Copy/paste this URL into your browser when you connect for the first time,
+    to login with a token:
+        http://(a084677e0088 or 127.0.0.1):8888/?token=5f2dbda0e1b14fbb9efb3fd765bea4773d62f86093afe977
+```
+
+So then go to that website (pick either the equivalent of `a084677e0088` or `127.0.0.1`, not both). 
+
 Happy learning! 
