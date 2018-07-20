@@ -1,28 +1,39 @@
-#ifndef __LUND_HPP__
-#define __LUND_HPP__
+#ifndef __LUND_HH__
+#define __LUND_HH__
 
-#include "json.hpp"
+#include "json.hh"
+#include "CleverStream.hh"
+#include "fastjet/tools/Recluster.hh"
+#include "fastjet/JetDefinition.hh"
 
 // Frederic Dreyer, BOOST 2018 tutorial
 // helper functions to write Lund coordinates to json file
 
 using nlohmann::json;
+using namespace fastjet;
 
+struct Declustering {
+  // the (sub)jet, and its two declustering parts, for subsequent use
+  PseudoJet jj, j1, j2;
+  // variables of the (sub)jet about to be declustered
+  double pt, m;
+  // properties of the declustering; NB kt is the _relative_ kt
+  // = pt2 * delta_R (ordering is pt2 < pt1)
+  double pt1, pt2, delta_R, z, kt, varphi;
+};
+
+void to_json(json& j, const Declustering& d) {
+  j = json{{"pt", float(d.pt)}, {"m", float(d.m)},
+	   {"pt1", float(d.pt1)}, {"pt2", float(d.pt2)},
+	   {"delta_R", float(d.delta_R)}, {"z",float(d.z)},
+	   {"kt",float(d.kt)}, {"varphi", float(d.varphi)}};
+}
 
 class Lund {
 public:
   
-  struct Declustering {
-    // the (sub)jet, and its two declustering parts, for subsequent use
-    PseudoJet jj, j1, j2;
-    // variables of the (sub)jet about to be declustered
-    double pt, m;
-    // properties of the declustering; NB kt is the _relative_ kt
-    // = pt2 * delta_R (ordering is pt2 < pt1)
-    double pt1, pt2, delta_R, z, kt, varphi;
-  };
-  
-  Lund(string fn) {
+  Lund(string fn) : recluster_(JetDefinition(aachen_algorithm,
+					     JetDefinition::max_allowable_R)){
     jsonfile_.reset(new CleverOFStream(fn+".json.gz"));
   }
   
@@ -35,18 +46,11 @@ public:
     *jsonfile_ << J << endl;
   }
   
-private:
-	
-  void to_json(json& j, const Declustering& d) {
-    j = json{{"pt", float(d.pt)}, {"m", float(d.m)},
-	     {"pt1", float(d.pt1)}, {"pt2", float(d.pt2)},
-	     {"delta_R", float(d.delta_R)}, {"z",float(d.z)},
-	     {"kt",float(d.kt)}, {"varphi", float(d.varphi)}};
-  }
+private:  
 
   vector<Declustering> jet_declusterings(const PseudoJet & jet_in) {
 
-    PseudoJet j = jet_rec(jet_in);
+    PseudoJet j = recluster_(jet_in);
     
     vector<Declustering> result;
     PseudoJet jj, j1, j2;
@@ -87,8 +91,9 @@ private:
       cerr << "HEY THERE, empty declustering. Jet p_t and n_const = " << jet_in.pt() << " " << jet_in.constituents().size() << endl;
     }
   }
-
+  
+  Recluster recluster_;
   unique_ptr<CleverOFStream> jsonfile_;
 };
 
-#endif // __LUND_HPP__
+#endif // __LUND_HH__

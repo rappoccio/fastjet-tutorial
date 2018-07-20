@@ -29,8 +29,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE  OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef NLOHMANN_JSON_HPP
-#define NLOHMANN_JSON_HPP
+#ifndef NLOHMANN_JSON_HH
+#define NLOHMANN_JSON_HH
 
 #include <algorithm> // all_of, copy, fill, find, for_each, generate_n, none_of, remove, reverse, transform
 #include <array> // array
