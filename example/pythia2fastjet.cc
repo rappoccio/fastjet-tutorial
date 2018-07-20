@@ -26,6 +26,12 @@ int main(int argc, char ** argv) {
   char * configfile = argv[1];
   unsigned int nEvents = atol(argv[2]);
 
+  
+  std::stringstream ss;
+  ss << configfile << "_n" << nEvents << "_output.txt";
+  std::ofstream output(ss.str());
+
+  
   // Define the AK8 jet finder.
   double R = 0.8, ptmin = 170.0, lepfrac = 0.9;
   fastjet::JetDefinition jet_def(fastjet::antikt_algorithm, R);
@@ -101,8 +107,11 @@ int main(int argc, char ** argv) {
 	fastjet::PseudoJet jetsdb1 = sdb1( jet );
 	fastjet::PseudoJet jetsdb2 = sdb2( jet );
 
+	char buff[1000];
+	sprintf(buff, " %8.4f %6.2f %6.2f %8.4f %8.4f %8.4f %8.4f", jet.perp(), jet.eta(), jet.phi(), jet.m(), jetsdb0.m(), jetsdb1.m(), jetsdb2.m() );
+	output << buff << std::endl;
 	if ( verbose ) {
-	  char buff[1000];
+
 	  sprintf(buff, " ungroomed: %8.4f %6.2f %6.2f %8.4f", jet.perp(), jet.eta(), jet.phi(), jet.m() );
 	  std::cout << buff << std::endl;
 	  sprintf(buff, " sd beta=0: %8.4f %6.2f %6.2f %8.4f", jetsdb0.perp(), jetsdb0.eta(), jetsdb0.phi(), jetsdb0.m() );
@@ -119,6 +128,8 @@ int main(int argc, char ** argv) {
 
   // Statistics on event generation.
   pythia.stat();
+
+  output.close();
 
   // Done.
   return 0;
