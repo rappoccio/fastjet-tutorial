@@ -18,10 +18,18 @@ lund.write(jet);
 
 ## Plot lund images
 
-After creating samples with the name
- * W-lund-pt2000-parton.json.gz
- * dijet-lund-pt2000-parton.json.gz
+After creating samples in pythia 8, or having downloaded them from the
+link above, you can obtain a Lund image in pyplot using
 
-Or having downloaded them from the link above, you can create an image
-in pyplot using
-`./plot_lund.py`
+`python3 plot_lund.py [--sig file_signal --bkg file_background --nev nevents --npxl npixels]`
+
+## Tagging of W jets
+
+You can try out a CNN Lund image tagger by downloading a trained model
+[here](https://cernbox.cern.ch/index.php/s/KH2AvQVwo0FLifJ).
+
+To try out the model, you can run
+
+`python3 test_lund.py [--sig file_signal --bkg file_background --nev nevents --threshold threshold]`
+
+Where threshold is a value between 0 and 1 (0.5 by default) used for the tagging.
