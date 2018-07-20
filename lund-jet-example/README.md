@@ -19,13 +19,13 @@ lund.write(jet);
 ## Plot lund images
 
 After creating samples in pythia 8, or having downloaded them from the
-link above, you can create an image in pyplot using
+link above, you can obtain a Lund image in pyplot using
 
 `python3 plot_lund.py [--sig file_signal --bkg file_background --nev nevents --npxl npixels]`
 
 ## Tagging of W jets
 
-You can try out the Lund image tagger by downloading the trained model
+You can try out a CNN Lund image tagger by downloading a trained model
 [here](https://cernbox.cern.ch/index.php/s/KH2AvQVwo0FLifJ).
 
 To try out the model, you can run
