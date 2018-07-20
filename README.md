@@ -32,7 +32,7 @@ You have access to all of the fastjet and fastjet-contrib tutorials in your dock
 
 
 ```
-cd /app/fastjet-3.3.1/examples
+cd /app/fastjet-3.3.1/example
 make 01-basic
 ./01-basic < data/single-event.dat
 ```
