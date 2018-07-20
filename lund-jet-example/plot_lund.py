@@ -2,26 +2,43 @@
 #
 # Frederic Dreyer, BOOST 2018 tutorial
 #
+# Load two files of signal and background images, and plot them
+#
+# Usage:
+#   python3 plot_lund.py [--sig file_sig] [--bkg file_bkg]
+#                        [--nev nevents]  [--npxl npixels]
+#
 
 from create_image import LundImage
 from matplotlib.colors import LogNorm
 import numpy as np
 import matplotlib.pyplot as plt
+import argparse
+
+parser = argparse.ArgumentParser(description='Plot lund images')
+parser.add_argument('--sig',action='store',
+                    default='W-lund-pt2000-parton.json.gz',
+                    dest='file_sig')
+parser.add_argument('--bkg',action='store',
+                    default='dijet-lund-pt2000-parton.json.gz',
+                    dest='file_bkg')
+parser.add_argument('--nev',  type=int, default=50000, dest='nev')
+parser.add_argument('--npxl', type=int, default=25,    dest='npxl')
+
+args = parser.parse_args()
 
 # set up the readers
-sig_reader = LundImage('W-lund-pt2000-parton.json.gz',50000,25)
-bkg_reader = LundImage('dijet-lund-pt2000-parton.json.gz',50000,25)
+sig_reader = LundImage(args.file_sig, args.nev, args.npxl)
+bkg_reader = LundImage(args.file_bkg, args.nev, args.npxl)
 
 # get array from file
 sig_images = np.array(sig_reader.values())[:,0]
 bkg_images = np.array(bkg_reader.values())[:,0]
+
+# plot average images
 sig_avg_img = np.transpose(np.average(sig_images,axis=0))
 bkg_avg_img = np.transpose(np.average(bkg_images,axis=0))
-# plot average image
-
-
 fig=plt.figure(figsize=(18, 4.5))
-
 
 # signal
 fig.add_subplot(1,3,1)
