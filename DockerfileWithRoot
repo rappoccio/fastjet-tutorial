@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM rootproject/root-ubuntu16
 
 # Set the working directory to /app
 WORKDIR /app
@@ -10,8 +10,11 @@ RUN ./install_software.sh
 
 # Set the python path
 ENV PYTHONPATH /app/lib/python3.5/site-packages/:/app/lib/
+
+RUN echo "c.NotebookApp.ip = '*'" > jupyter_notebook_config.py && chown ${username} *
+
 # Allow incoming connections on port 8888
 EXPOSE 8888
 
 # Run app.py when the container launches
-CMD ["/bin/bash"]
+CMD ["root", "--notebook"]
