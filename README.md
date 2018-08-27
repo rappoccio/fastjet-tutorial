@@ -26,6 +26,17 @@ root@588a429d41d2:/app# ls
 Dockerfile  bin  fastjet-3.3.1  fjcontrib-1.036  include  lib  pythia8235  share
 ```
 
+### With ROOT
+
+If you want to use ROOT, then:
+```
+docker pull srappoccio/fastjet-tutorial-root:latest
+docker run -it -p 8888:8888 srappoccio/fastjet-tutorial-root:latest
+```
+
+and then you do not need to execute jupyter, since it does that for you. 
+
+
 ## Fastjet Tutorial
 
 You have access to all of the fastjet and fastjet-contrib tutorials in your docker image. For instance:
