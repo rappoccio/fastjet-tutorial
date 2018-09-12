@@ -26,15 +26,55 @@ root@588a429d41d2:/app# ls
 Dockerfile  bin  fastjet-3.3.1  fjcontrib-1.036  include  lib  pythia8235  share
 ```
 
+### Persistifying data
+
+You will remove all of your work on your Docker container when it
+exist unless you specify otherwise. The way to do that is to mount a
+directory from your host machine onto your docker image. There are
+bash scripts included that will do this for either Mac OS X or Ubuntu
+flavors:
+
+
+
+```
+bash ./runDockerX11OSX.sh srappoccio/fastjet-tutorial:latest
+```
+
+(or change ```OSX``` above to ```Ubuntu```). 
+
+This will give you a prompt, and mount a directory ```results``` in
+the current working directory of the docker image. You can then use
+that for communication back and forth from the docker container. Store
+any results you want, and they will exist after your image is
+deleted.
+
 ### With ROOT
 
-If you want to use ROOT, then:
+If you want to use ROOT, then you can do everything as above, but
+change ```fastjet-tutorial``` to ```fastjet-tutorial-root```.
+
 ```
 docker pull srappoccio/fastjet-tutorial-root:latest
 docker run -it -p 8888:8888 srappoccio/fastjet-tutorial-root:latest
 ```
 
-and then you do not need to execute jupyter, since it does that for you. 
+The rest
+works as above, except by default it runs a jupyter instance instead
+of bash. You can also persistify your data if you want, with
+
+```
+runDockerX11OSX.sh
+```
+
+(or change ```OSX``` above to ```Ubuntu```). 
+
+If you want a bash shell and not a jupyter pyroot script, you can use
+the "Command Line" flavors of the bash scripts, which are the same
+except they have an explicit ```/bin/bash``` entry point. 
+
+```
+runDockerX11OSXCommandLine.sh
+```
 
 
 ## Fastjet Tutorial
