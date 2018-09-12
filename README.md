@@ -37,7 +37,7 @@ flavors:
 
 
 ```
-bash ./runDockerX11OSX.sh srappoccio/fastjet-tutorial:latest
+./runDockerX11OSX.sh srappoccio/fastjet-tutorial:latest
 ```
 
 (or change ```OSX``` above to ```Ubuntu```). 
@@ -63,7 +63,7 @@ works as above, except by default it runs a jupyter instance instead
 of bash. You can also persistify your data if you want, with
 
 ```
-runDockerX11OSX.sh
+./runDockerX11OSX.sh srappoccio/fastjet-tutorial-root:latest
 ```
 
 (or change ```OSX``` above to ```Ubuntu```). 
@@ -73,7 +73,7 @@ the "Command Line" flavors of the bash scripts, which are the same
 except they have an explicit ```/bin/bash``` entry point. 
 
 ```
-runDockerX11OSXCommandLine.sh
+./runDockerX11OSXCommandLine.sh srappoccio/fastjet-tutorial-root:latest
 ```
 
 
