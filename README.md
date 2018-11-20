@@ -42,7 +42,9 @@ flavors:
 
 (or change ```OSX``` above to ```Ubuntu```). 
 
-This will give you a prompt, and mount a directory ```results``` in
+This will give you a prompt, and mount the directory ```../results``` 
+(i.e., a directory named "results" up one level from this one)
+in
 the current working directory of the docker image. You can then use
 that for communication back and forth from the docker container. Store
 any results you want, and they will exist after your image is
@@ -52,6 +54,8 @@ deleted.
 
 If you want to use ROOT, then you can do everything as above, but
 change ```fastjet-tutorial``` to ```fastjet-tutorial-root```.
+
+*Important*: The python version for ROOT is still python2. Sorry. 
 
 ```
 docker pull srappoccio/fastjet-tutorial-root:latest
