@@ -3,7 +3,7 @@ apt-get update
 apt-get install -y wget g++ libtool rsync make x11-apps python3-dev python3-numpy python3-pip python3-tk 
 rm -rf /var/lib/apt/lists/*
 #pip install --no-cache-dir matplotlib scipy numpy scikit-learn keras tensorflow jupyter metakernel zmq notebook==5.* plaidml-keras plaidbench energyflow
-pip3 install --no-cache-dir matplotlib scipy numpy scikit-learn keras tensorflow jupyter metakernel zmq notebook==5.* plaidml-keras plaidbench energyflow
+pip3 install --no-cache-dir matplotlib scipy numpy scikit-learn keras tensorflow jupyter metakernel zmq notebook==5.* plaidml-keras plaidbench energyflow uproot
 update-alternatives --install /usr/bin/python python /usr/bin/python3 10
 # fastjet
 wget http://fastjet.fr/repo/fastjet-3.3.1.tar.gz \
