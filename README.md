@@ -12,29 +12,7 @@ Then in a terminal:
 docker pull srappoccio/fastjet-tutorial:latest
 ```
 
-
-You should then be able to run as:
-
-```
-docker run -it -p 8888:8888 srappoccio/fastjet-tutorial:latest
-```
-
-You will get a prompt, and you can see the results of "ls":
-
-```
-root@588a429d41d2:/app# ls
-Dockerfile  bin  fastjet-3.3.1  fjcontrib-1.036  include  lib  pythia8235  share
-```
-
-### Persistifying data
-
-You will remove all of your work on your Docker container when it
-exist unless you specify otherwise. The way to do that is to mount a
-directory from your host machine onto your docker image. There are
-bash scripts included that will do this for either Mac OS X or Ubuntu
-flavors:
-
-
+To run:
 
 ```
 ./runDockerX11OSX.sh srappoccio/fastjet-tutorial:latest
@@ -58,19 +36,13 @@ change ```fastjet-tutorial``` to ```fastjet-tutorial-root```.
 *Important*: The python version for ROOT is still python2. Sorry. 
 
 ```
-docker pull srappoccio/fastjet-tutorial-root:latest
-docker run -it -p 8888:8888 srappoccio/fastjet-tutorial-root:latest
-```
-
-The rest
-works as above, except by default it runs a jupyter instance instead
-of bash. You can also persistify your data if you want, with
-
-```
 ./runDockerX11OSX.sh srappoccio/fastjet-tutorial-root:latest
 ```
 
 (or change ```OSX``` above to ```Ubuntu```). 
+
+
+### With command line
 
 If you want a bash shell and not a jupyter pyroot script, you can use
 the "Command Line" flavors of the bash scripts, which are the same
@@ -83,7 +55,7 @@ except they have an explicit ```/bin/bash``` entry point.
 
 ## Fastjet Tutorial
 
-You have access to all of the fastjet and fastjet-contrib tutorials in your docker image. For instance:
+You will probably want the command line version above (unless you want to use a python jupyter notebook). You have access to all of the fastjet and fastjet-contrib tutorials in your docker image. For instance:
 
 
 ```
@@ -100,34 +72,22 @@ make example_softdrop
 ```
 
 
-There is also an example to use PYTHIA8 to generate events with a given configuration (the example we have is boosted $Z\rightarrow ll+$jets):
-
-```
-cd examples
-./pythia2fastjet test.cfg 100 1
-```
-
-Happy thinking!
-
 
 ## Machine Learning Tutorial
 
-Be sure to run your docker image as shown above with the port set to '8888:8888'. Then within the docker image, you can start a jupyter notebook as:
+You will probably want the jupyter notebook version above. The examples live in the `lund_jet_examples` directory. 
 
-```
-jupyter notebook --ip 0.0.0.0 --no-browser --allow-root
-```
 
-You can then access the jupyter notebook on your host machine here: [http://localhost:8888/tree](http://localhost:8888/tree).
 
-Note: sometimes you may get a page looking for a token. Instead of doing that you can just directly access the website from the text dump from jupyter, which looks something like:
+## Notes:
 
+- To access the notebook, go to [localhost:8888](https://localhost:8888) or [127.0.0.1:8888](https://127.0.0.1:8888). You will often be asked for a token, which can be found in the printout like this:
 ```
     Copy/paste this URL into your browser when you connect for the first time,
     to login with a token:
         http://(a084677e0088 or 127.0.0.1):8888/?token=5f2dbda0e1b14fbb9efb3fd765bea4773d62f86093afe977
 ```
+The token is the part after the equal sign. 
 
-So then go to that website (pick either the equivalent of `a084677e0088` or `127.0.0.1`, not both). 
 
-Happy learning! 
+
