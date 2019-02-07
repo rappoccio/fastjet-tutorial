@@ -16,13 +16,3 @@ wget http://fastjet.hepforge.org/contrib/downloads/fjcontrib-1.036.tar.gz \
     && cd fjcontrib-1.036 \
     && ./configure --fastjet-config=/app/bin/fastjet-config && make && make install \
     && cd .. 
-# Pythia
-wget http://home.thep.lu.se/~torbjorn/pythia8/pythia8235.tgz \
-    && tar xzf pythia8235.tgz && rm pythia8235.tgz \
-    && cd pythia8235 \
-    && ./configure --prefix=/app --with-python-include=/usr/include/python2.7 --with-python-bin=/usr/bin/ --with-root=/usr/local/root && make \
-    && cd examples && rootcint -f pythiaDict.cxx -c -I../include main92.h main92LinkDef.h \
-    && g++ -I../include `root-config --glibs` `root-config --cflags` -L../lib -lpythia8 -shared -fPIC -o pythiaDict.so pythiaDict.cxx \
-    && cp pythiaDict.so ../lib \
-    && cd .. \
-    && make install
